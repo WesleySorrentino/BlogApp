@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v8GuHbI3GAo9+oi4wZj62ESYV1KyjTsv0f/Ddc9gh8oDyiWM0xRQhRVb+acvpOORFWXNi6eorbKTIrrkYgCbEA==",
+  "dgSpecHash": "Cbjc+jcdf6noiQe6oa1SiyXSoq64DFQ1BfL+TPmnsyusrU9IYCQsUaDnwK0GPzXeId6vsFcTxXz7H+0EONmyAA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Wesley\\Github\\C#\\BlogApp\\BlogApplication\\BlogApplication.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.9\\microsoft.aspnetcore.authentication.google.3.1.9.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",
