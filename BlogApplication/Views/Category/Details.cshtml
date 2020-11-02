@@ -1,0 +1,28 @@
+﻿@model DataLibrary.Models.BlogPost
+
+@{
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			@foreach (var category in Model.Category)
+			{
+				@foreach (var categories in Model.Categories)
+				{
+					@foreach (var item in Model.Blog)
+					{
+						if (category.Id == categories.Categories_Id && categories.Blog_Id == item.Id)
+						{
+							<p><span>Blog Name: @item.Title </span><span>@category.Id</span> - @category.Name <a asp-action="Delete" asp-route-id="@categories.Id" class="btn btn-sm btn-danger">Delete Category from blog</a> </p>
+						}
+					}
+
+				}
+
+			}
+		</div>
+	</div>
+</div>
+
+

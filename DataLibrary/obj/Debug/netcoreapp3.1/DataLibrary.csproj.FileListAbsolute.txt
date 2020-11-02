@@ -1,0 +1,9 @@
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.deps.json
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.dll
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.pdb
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.AssemblyInfo.cs
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.dll
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.pdb
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Wesley\Github\C#\BlogApp\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.csprojAssemblyReference.cache

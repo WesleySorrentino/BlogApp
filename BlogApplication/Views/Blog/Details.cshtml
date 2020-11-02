@@ -1,0 +1,86 @@
+﻿@using DataLibrary.Models
+@using Microsoft.AspNetCore.Identity
+
+@model BlogPost
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<div class="container text-center">
+	<div class="row">
+		<div class="col-md-12">
+			@foreach (var blog in Model.Blog)
+			{
+				ViewData["Title"] = $"{blog.Title}";
+
+				<h1 class="blog-title">@blog.Title</h1>
+				<p class="blog-content">@Html.Raw(blog.Content)</p>
+
+				<div class="blog-about">
+					<div class="blog-author col-sm-3">
+						<p>Author</p>
+						<img class="author-image" src="~/Assets/Images/titled 02.png" alt="Wesley Sorrentino Profile Pic" />
+						<p class="author-name">@blog.Author</p>
+					</div>
+					<div class="blog-info col-sm-9">
+						<p>Posted @blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
+						<p>Categories: </p>
+						@foreach (var cat in Model.Category)
+						{
+							<p>@cat.Name</p>
+						}
+					</div>
+				</div>
+
+				@if (User.IsInRole("Admin"))
+				{
+					<a asp-action="Edit" asp-route-id="@blog.Id">Edit Post</a>
+					<a asp-action="Delete" asp-route-id="@blog.Id">Delete Post</a>
+				}
+
+				<hr />
+
+
+				<div class="blog-comments-title">
+					<p>Comments:</p>
+				</div>
+
+				<a asp-controller="Comment" asp-route-id="@blog.Id" asp-action="Create" class="btn btn-sm btn-success">Create a comment</a>
+
+				if (Model.Comments.Count() > 0)
+				{
+					<div class="blog-comments col-12">
+						@foreach (var comment in Model.Comments)
+						{
+							if (comment.Blog_Id == blog.Id)
+							{
+								<p><strong>@comment.Name</strong> - @comment.Content | @comment.Post_date.Month/@comment.Post_date.Day/@comment.Post_date.Year</p>
+
+								<div class="blog-comments-buttons">
+									@if (comment.Blog_User_Id == UserManager.GetUserId(User))
+									{
+										<a asp-action="Edit" asp-controller="Comment" asp-route-id="@comment.Id" class="btn btn-info btn-sm">Edit Comment</a> <a asp-action="Delete" asp-controller="Comment" asp-route-id="@comment.Id" class="btn btn-sm btn-danger">Delete Comment</a>
+									}
+								</div>
+							}
+						}
+					</div>
+
+				}
+				else
+				{
+					<p>No Comments.</p>
+				}
+
+				<div>
+					@if (User.IsInRole("Admin"))
+					{
+						<a asp-action="Details" asp-controller="Category" asp-route-id="@blog.Id">View Categories to this Post</a>
+						<a asp-action="Create" asp-controller="Categories">Add Categories to blog</a>
+					}
+				</div>
+			}
+		</div>
+	</div>
+
+</div>
+

@@ -1,0 +1,29 @@
+﻿@{
+	ViewData["Title"] = "Show All Contacts";
+}
+
+@model DataLibrary.Models.ShowContacts
+
+<h1>Showing All Contacts in Database</h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Message</th>
+		</tr>
+	</thead>
+	<tbody>		
+		@foreach (var contact in Model.Contacts)
+		{
+		<tr>
+			<td>@contact.Name</td>
+			<td>@contact.Email</td>
+			<td>@contact.Message</td>
+		</tr>
+		}		
+	</tbody>
+	
+</table>
+

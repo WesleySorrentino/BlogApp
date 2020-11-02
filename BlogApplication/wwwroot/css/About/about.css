@@ -1,0 +1,21 @@
+﻿#about-title {
+	text-align: center;
+}
+
+img {
+	width: 7rem;
+}
+
+#logos {
+	display: flex;
+	padding: 1.5rem;
+}
+
+.logo {
+	display: block;
+	margin: auto;
+}
+
+#logos :nth-last-of-type(4) {
+	padding-top: 1.5rem;
+}

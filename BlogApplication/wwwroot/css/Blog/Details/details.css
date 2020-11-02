@@ -1,0 +1,53 @@
+.blog-content {
+	text-align: left;
+}
+
+.blog-author {
+	text-align: center;
+	padding-top: 1.5rem;
+	/* box-shadow: 2px 2px;
+	border: 1px black; */
+	border-radius: 5%;
+}
+
+.author-image {
+	border-radius: 50%;
+}
+
+.author-name {
+	padding: 1rem;
+}
+
+.blog-about {
+	display: flex;
+	height: auto;
+	padding: auto;
+	margin: auto;
+}
+
+.blog-info {
+	padding: 5rem;
+}
+
+.blog-comments-title {
+	width: auto;
+	margin: 1rem;
+	font-size: 2rem;
+}
+
+.blog-comments {
+	width: auto;
+	margin: 1rem 5rem;
+	display: flex;
+	flex-flow: column;
+	text-align: left;
+}
+
+.blog-comments p {
+	width: auto;
+	padding: .5rem;
+}
+
+.blog-comments-buttons {
+	padding: .2rem .5rem;
+}

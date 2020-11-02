@@ -1,0 +1,46 @@
+﻿@using DataLibrary.Models
+@using DataLibrary;
+
+@model BlogPost
+
+@{
+	ViewData["Title"] = "All Blogs";
+
+	DataAccess db = new DataAccess();
+}
+
+@if (User.IsInRole("Admin"))
+{
+	<a asp-action="Create" class="btn btn-info text-white">Create new post</a>
+}
+
+
+<div class="container">
+	<div class="row">
+		@foreach (var item in Model.Blog)
+		{
+		<div class="col-md-12 border border-dark m-3 p-2">
+			<a asp-action="Details" asp-route-id="@item.Id"><h1>@item.Title</h1></a>
+			<p>@item.Content.Substring(0, item.Content.Length / 55)....</p>
+			@foreach (var i in Model.Category)
+			{
+				@foreach (var cat in Model.Categories)
+				{
+					if (cat.Categories_Id == i.Id && cat.Blog_Id == item.Id)
+					{
+						<p>@i.Name</p>
+					}
+				}
+			}
+			<p>@item.Post_Date.Date.Month/@item.Post_Date.Day/@item.Post_Date.Year</p>
+			<p>Comments: @db.GetComments(item.Id).Count()</p>
+
+			@if (User.IsInRole("Admin"))
+			{
+				<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit Post</a>
+				<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete Post</a>
+			}
+		</div>
+		}
+	</div>
+</div>
