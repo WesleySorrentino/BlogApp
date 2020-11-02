@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using DataLibrary;
 using DataLibrary.Models;
 using Microsoft.AspNetCore.Authorization;
+using NToastNotify;
 
 namespace TestingDB.Controllers
 {
@@ -15,7 +16,16 @@ namespace TestingDB.Controllers
     {
         readonly DataAccess db = new DataAccess();
         readonly BlogPost blogModel = new BlogPost();
+        private readonly IToastNotification _toastNotification;
+
+        public BlogController(IToastNotification toastNotification)
+        {
+            _toastNotification = toastNotification;
+        }
+
+
         // GET: BlogController
+        //Shows all blogs
         public ActionResult Index()
         {                         
             blogModel.Blog = db.GetBlogsFromDB();
@@ -64,14 +74,15 @@ namespace TestingDB.Controllers
                 {
                     db.AddBlogToDb(blog.Title, blog.Content, blog.Author);
 
-
-                    return RedirectToAction(nameof(Index));
+                    _toastNotification.AddSuccessToastMessage("Created a new Blog");
                 }
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                _toastNotification.AddErrorToastMessage("Error Creating new blog");
+
                 return View(blog);
             }
         }
@@ -139,6 +150,7 @@ namespace TestingDB.Controllers
         }
 
         // POST: BlogController/Delete/5
+        //Removes Blog from Database
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -146,14 +158,20 @@ namespace TestingDB.Controllers
         {
             try
             {
+                //Gets all comments from blog
                 db.RemoveCommentsFromBlog(id);
+                //Gets all categories from blog
                 db.RemoveAllCategoriesFromBlog(id);
-                db.RemovePost(id); 
+                //Removes blog post
+                db.RemovePost(id);
+
+                _toastNotification.AddSuccessToastMessage("Successfully Removed Blog Post.");
 
                 return RedirectToAction("Index", "Blog");
             }
             catch
             {
+                _toastNotification.AddErrorToastMessage("Error deleting blog post");
                 return View();
             }
         }

@@ -37,6 +37,7 @@ namespace BlogApplication.Controllers
         // GET: CommentController/Create
         public ActionResult Create()
         {
+            //Checks if User is signed in
             if (_signInManager.IsSignedIn(User))
             {
                 return View();
@@ -77,6 +78,7 @@ namespace BlogApplication.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        //Adds comment to Database
                         db.AddCommentToDb((long)id, name, user, comment.Content);
                     }
 
@@ -106,6 +108,7 @@ namespace BlogApplication.Controllers
 
             var user = _userManager.GetUserId(User);
 
+            //Gets comment Id from database
             blogModel.Comments = db.GetCommentIdFromDb((long)id, user);
 
             foreach (var item in blogModel.Comments)
@@ -142,6 +145,7 @@ namespace BlogApplication.Controllers
                     {
                         if (user == item.Blog_User_Id || User.IsInRole("Admin"))
                         {
+                            //Updates comment in Database
                             db.UpdateComment(id, comment.Content, user);
                         }
 
@@ -151,9 +155,9 @@ namespace BlogApplication.Controllers
                                 new { controller = "Blog", action = "Details", Id = item.Blog_Id }));
                     }
                 }
+                _toastNotification.AddErrorToastMessage("Error updating comment.");
 
-                return View(comment);
-                
+                return View(comment);   
             }
             catch
             {
@@ -171,7 +175,6 @@ namespace BlogApplication.Controllers
             }
 
             var user = _userManager.GetUserId(User);
-
 
             blogModel.Comments = db.GetCommentIdFromDb((long)id,user);
 
@@ -214,7 +217,9 @@ namespace BlogApplication.Controllers
 
                     if (user == item.Blog_User_Id)
                     {
+                        //Deletes comment
                         db.RemoveComment(id, user);
+                        _toastNotification.AddSuccessToastMessage("Successfully deleted comment");
 
                         return RedirectToAction("Details", "Blog", new { id });
                     }

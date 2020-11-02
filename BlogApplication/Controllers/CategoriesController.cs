@@ -19,7 +19,7 @@ namespace BlogApplication.Controllers
             return View();
         }
 
-        
+        //Adds category to blog
         [HttpPost]
         public ActionResult Create([Bind("Categories_Id,Blog_Id")] CategoriesModel categories)
         {

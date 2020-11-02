@@ -31,15 +31,18 @@ namespace BlogApplication.Controllers
 
         [Authorize]
         public async Task<IActionResult> Manage()
-        {            
+        {   
+            //Gets Current User
             var user = await _userManager.GetUserAsync(User);
-
+           
             if (user.Id == null)
             {
                 _toastNotification.AddErrorToastMessage("Error Occured while trying to redirect to Manage Page");
 
                 return RedirectToAction("Index", "Home");
             }
+
+            //Provide the user to Manage Model
             var manageUser = new UserManageModel
             {
                 Id = user.Id,
@@ -55,18 +58,23 @@ namespace BlogApplication.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ResetPassword(string currentPassword, string confirmCurrentPassword, string newPassword)
         {
+            //Gets Current User
             var user = await _userManager.GetUserAsync(User);            
 
+            //Checks if any of the posted fields are null
             if (currentPassword == null && confirmCurrentPassword == null && newPassword == null)
             {
                 return View();
             }
 
+            //Checks if passwords match
             if (currentPassword == confirmCurrentPassword)
             {
+                //Update users passwords
                 await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 
                 _toastNotification.AddSuccessToastMessage("Successfully changed password");
@@ -93,6 +101,7 @@ namespace BlogApplication.Controllers
                 return View();
             }
 
+            //finds user matching provided email
             var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null)
@@ -102,7 +111,7 @@ namespace BlogApplication.Controllers
                 return View();
             }
 
-            //sign in
+            //sign in user
             var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false);
 
             if (signInResult.Succeeded)
@@ -128,11 +137,14 @@ namespace BlogApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(string username, string email, string password)
         {
+            //Creates a new User model
             var user = new IdentityUser
             {
                 UserName = username,
                 Email = email,
             };
+
+            //adds to database
             var result = await _userManager.CreateAsync(user, password);
 
             if (!_appDbContext.Users.Any(u=>u.Email == user.Email))
@@ -140,9 +152,9 @@ namespace BlogApplication.Controllers
                 if (result.Succeeded)
                 {
                     //sign user here
-
                     var currentUser = await _userManager.FindByNameAsync(username);
 
+                    //Add role to user
                     await _userManager.AddToRoleAsync(currentUser, "User");                   
 
                     var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false);
@@ -175,6 +187,7 @@ namespace BlogApplication.Controllers
 
         public async Task<IActionResult> LogOut()
         {
+            //Signs user out
             await _signInManager.SignOutAsync();
 
             _toastNotification.AddSuccessToastMessage("Successfully Logged out");
