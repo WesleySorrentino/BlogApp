@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlogApplication.Data;
+using DataLibrary.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,56 @@ namespace BlogApplication.Controllers
             _appDbContext = appDbContext;
         }
 
+        [Authorize]
+        public async Task<IActionResult> Manage()
+        {            
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user.Id == null)
+            {
+                _toastNotification.AddErrorToastMessage("Error Occured while trying to redirect to Manage Page");
+
+                return RedirectToAction("Index", "Home");
+            }
+            var manageUser = new UserManageModel
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                Email = user.Email
+            };
+
+            return View(manageUser);
+        }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(string currentPassword, string confirmCurrentPassword, string newPassword)
+        {
+            var user = await _userManager.GetUserAsync(User);            
+
+            if (currentPassword == null && confirmCurrentPassword == null && newPassword == null)
+            {
+                return View();
+            }
+
+            if (currentPassword == confirmCurrentPassword)
+            {
+                await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+
+                _toastNotification.AddSuccessToastMessage("Successfully changed password");
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            _toastNotification.AddErrorToastMessage("Error Occured: Could not Update Password </br> Please Check current Passwords Match!");
+
+            return View();
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -46,6 +98,7 @@ namespace BlogApplication.Controllers
             if (user == null)
             {
                 _toastNotification.AddErrorToastMessage("Could not find the user with the email or password provided.");
+
                 return View();
             }
 
@@ -62,7 +115,7 @@ namespace BlogApplication.Controllers
                 return RedirectToAction("Index","Home");
             }
 
-            _toastNotification.AddErrorToastMessage("An Error Occured");
+            _toastNotification.AddErrorToastMessage($"An Error Occured: Email or Password doesn't exist");
 
             return View();
         }
@@ -90,15 +143,14 @@ namespace BlogApplication.Controllers
 
                     var currentUser = await _userManager.FindByNameAsync(username);
 
-
-
-                    await _userManager.AddToRoleAsync(currentUser, "User");
+                    await _userManager.AddToRoleAsync(currentUser, "User");                   
 
                     var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false);
 
                     if (signInResult.Succeeded)
                     {
                         _toastNotification.AddSuccessToastMessage($"Successfully Created an Account!");
+
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -117,8 +169,6 @@ namespace BlogApplication.Controllers
 
                 return View();
             }
-
-            
 
             return RedirectToAction("Index", "Home");
         }

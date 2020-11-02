@@ -433,3 +433,5 @@ C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\bin\Debug\netcoreapp3.1\NToast
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.csproj.CoreCompileInputs.cache
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\Manage.cshtml.g.cs
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
