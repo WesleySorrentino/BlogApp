@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlogApplication.Data;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -95,6 +90,8 @@ namespace BlogApplication.Controllers
 
                     var currentUser = await _userManager.FindByNameAsync(username);
 
+
+
                     await _userManager.AddToRoleAsync(currentUser, "User");
 
                     var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false);
@@ -121,21 +118,18 @@ namespace BlogApplication.Controllers
                 return View();
             }
 
+            
+
             return RedirectToAction("Index", "Home");
         }
 
-
-        public IActionResult ForgotPassword()
+        public async Task<IActionResult> LogOut()
         {
-            return View();
-        }
+            await _signInManager.SignOutAsync();
 
-        [HttpPost]
-        public IActionResult ForgotPassword(string emailID)
-        {
+            _toastNotification.AddSuccessToastMessage("Successfully Logged out");
 
-
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
