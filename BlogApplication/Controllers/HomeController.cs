@@ -83,6 +83,13 @@ namespace BlogApplication.Controllers
         [Authorize(Roles ="Admin")]
         public IActionResult DeleteContact(int? id)
         {
+            if (id == null)
+            {
+                _toastNotification.AddErrorToastMessage("Error Occured tyring to find id.");
+
+                return RedirectToAction("ShowAllContacts");
+            }
+
             contacts.Contact = db.GetContactId((int)id);
 
             return View(contacts.Contact.First());

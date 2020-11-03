@@ -8,8 +8,10 @@
 @model UserManageModel
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 manage">
+			<label asp-for="Name" class="control-label"></label>
 			<p>@Model.Name</p>
+			<label asp-for="Email" class="control-label"></label>
 			<p>@Model.Email</p>
 			<div class="form-group">
 				<a asp-action="ResetPassword" asp-controller="Account" asp-route-id="@Model.Id">Reset Password</a>
