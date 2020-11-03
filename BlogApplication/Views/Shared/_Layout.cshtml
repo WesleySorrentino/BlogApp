@@ -8,7 +8,10 @@
 	<link rel="stylesheet" href="~/css/site.css" />
 	<link rel="stylesheet" href="~/css/About/about.css" />
 	<link rel="stylesheet" href="~/css/Blog/Details/details.css" />
+	<link rel="stylesheet" media="screen" href="~/css/Blog/Details/details-media.css" />
+	<link href="~/css/Blog/index.css" rel="stylesheet" />
 	<link href="~/css/toastr.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 </head>
 <body>
 	@await Component.InvokeAsync("NToastNotify")
@@ -39,7 +42,7 @@
 							<a class="nav-link text-dark" asp-controller="Home" asp-action="Contact">Contact</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" href="https://wesleysorrentino.github.io/">My Portfolio</a>
+							<a class="nav-link text-dark" href="https://wesleysorrentino.github.io/">Portfolio</a>
 						</li>
 						@if (User.IsInRole("Admin"))
 						{

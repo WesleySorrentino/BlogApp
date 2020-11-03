@@ -5,24 +5,30 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<div class="container text-center">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-sm-1 col-md-12 col-lg-12 blog">
 			@foreach (var blog in Model.Blog)
 			{
 				ViewData["Title"] = $"{blog.Title}";
 
 				<h1 class="blog-title">@blog.Title</h1>
 				<p class="blog-content">@Html.Raw(blog.Content)</p>
-
-				<div class="blog-about">
-					<div class="blog-author col-sm-3">
+				<div class="row">
+					<div class="blog-author col-sm-2 col-md-3 col-lg-2">
 						<p>Author</p>
 						<img class="author-image" src="~/Assets/Images/titled 02.png" alt="Wesley Sorrentino Profile Pic" />
 						<p class="author-name">@blog.Author</p>
 					</div>
-					<div class="blog-info col-sm-9">
-						<p>Posted @blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
+					<div class="col-sm-12 col-md-3 col-lg-2" id="social-links">
+						<ul>
+							<li><a href="https://www.linkedin.com/in/wesley-sorrentino-863822179/"><i class="fab fa-linkedin-in"></i><p>Linkedin</p></a></li>
+							<li><a href="https://github.com/WesleySorrentino"><i class="fab fa-github"></i><p>Github</p></a></li>
+							<li><a href="https://twitter.com/WesSorrentino"><i class="fab fa-twitter"></i><p>Twitter</p></a></li>
+						</ul>
+					</div>
+					<div class="blog-info col-sm-12 col-md-3 col-lg-6">
+						<p>Posted</p>
+						<p>@blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
 						<p>Categories: </p>
 						@foreach (var cat in Model.Category)
 						{
@@ -30,6 +36,8 @@
 						}
 					</div>
 				</div>
+						
+				
 
 				@if (User.IsInRole("Admin"))
 				{
@@ -39,18 +47,20 @@
 
 				<hr />
 
+				<div class="col-lg-12 col-sm-1">
+					<div class="blog-comments-title">
+						<p>Comments:</p>
+						<a asp-controller="Comment" asp-route-id="@blog.Id" asp-action="Create" class="btn btn-sm btn-success">Create a comment</a>
+					</div>
 
-				<div class="blog-comments-title">
-					<p>Comments:</p>
-				</div>
 
-				<a asp-controller="Comment" asp-route-id="@blog.Id" asp-action="Create" class="btn btn-sm btn-success">Create a comment</a>
 
-				if (Model.Comments.Count() > 0)
-				{
-					<div class="blog-comments col-12">
+					@if (Model.Comments.Count() > 0)
+					{
+					<div class="blog-comments col-sm-12 col-xl-12">
 						@foreach (var comment in Model.Comments)
 						{
+							
 							if (comment.Blog_Id == blog.Id)
 							{
 								<p><strong>@comment.Name</strong> - @comment.Content | @comment.Post_date.Month/@comment.Post_date.Day/@comment.Post_date.Year</p>
@@ -64,12 +74,13 @@
 							}
 						}
 					</div>
-
-				}
-				else
-				{
+					}
+					else
+					{
 					<p>No Comments.</p>
-				}
+					}
+				</div>
+				
 
 				<div>
 					@if (User.IsInRole("Admin"))
@@ -81,6 +92,4 @@
 			}
 		</div>
 	</div>
-
-</div>
 

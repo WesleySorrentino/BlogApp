@@ -14,7 +14,7 @@ namespace BlogApplication.Controllers
     {
         readonly DataAccess db = new DataAccess();
 
-        public ActionResult Create(int id)
+        public ActionResult Create()
         {
             return View();
         }

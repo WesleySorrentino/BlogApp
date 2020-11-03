@@ -1,0 +1,9 @@
+.blogPost {
+	border: 1px solid black;
+	margin: 1rem;
+	padding: 1rem;
+}
+
+.blog-button {
+	border-radius: 10%;
+}

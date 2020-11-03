@@ -11,35 +11,38 @@
 
 @if (User.IsInRole("Admin"))
 {
-	<a asp-action="Create" class="btn btn-info text-white">Create new post</a>
+	<a asp-action="Create" class="btn btn-info text-white blog-button">Create new post</a>
 }
 
 
 <div class="container">
 	<div class="row">
+		
 		@foreach (var blog in Model.Blog)
 		{
-		<div class="col-md-12 border border-dark m-3 p-2">
-			<a asp-action="Details" asp-route-id="@blog.Id"><h1>@blog.Title</h1></a>
-			<p>@blog.Content.Substring(0, blog.Content.Length / 55)....</p>
-			@foreach (var i in Model.Category)
-			{
-				@foreach (var cat in Model.Categories)
+		<div class="col-md-12">
+			<div class="blogPost">
+				<a asp-action="Details" asp-route-id="@blog.Id"><h1>@blog.Title</h1></a>
+				<p>@blog.Content.Substring(0, blog.Content.Length / 55)....</p>
+				@foreach (var i in Model.Category)
 				{
-					if (cat.Categories_Id == i.Id && cat.Blog_Id == blog.Id)
+					@foreach (var cat in Model.Categories)
 					{
-						<p>@i.Name</p>
+						if (cat.Categories_Id == i.Id && cat.Blog_Id == blog.Id)
+						{
+							<p>@i.Name</p>
+						}
 					}
 				}
-			}
-			<p>@blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
-			<p>Comments: @db.GetComments(blog.Id).Count()</p>
+				<p>@blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
+				<p>Comments: @db.GetComments(blog.Id).Count()</p>
 
-			@if (User.IsInRole("Admin"))
-			{
-				<a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-success">Edit Post</a>
-				<a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger">Delete Post</a>
-			}
+				@if (User.IsInRole("Admin"))
+				{
+					<a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-success blog-button">Edit Post</a>
+					<a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger blog-button">Delete Post</a>
+				}
+			</div>
 		</div>
 		}
 	</div>

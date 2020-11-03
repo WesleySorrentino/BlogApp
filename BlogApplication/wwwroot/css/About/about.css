@@ -7,15 +7,32 @@ img {
 }
 
 #logos {
-	display: flex;
 	padding: 1.5rem;
 }
 
 .logo {
-	display: block;
 	margin: auto;
+	padding: 4rem;
 }
 
-#logos :nth-last-of-type(4) {
-	padding-top: 1.5rem;
+h3 {
+	text-align: center;
+}
+
+@media only screen and (device-width: 430px) {
+	.logo {
+		padding: 8.5rem;
+	}
+}
+
+@media only screen and (device-width: 411px) {
+	.logo {
+		padding: 8rem;
+	}
+}
+
+@media only screen and (device-width: 375px) {
+	.logo {
+		padding: 6rem;
+	}
 }

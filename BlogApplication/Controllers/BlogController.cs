@@ -172,6 +172,7 @@ namespace TestingDB.Controllers
             catch
             {
                 _toastNotification.AddErrorToastMessage("Error deleting blog post");
+
                 return View();
             }
         }

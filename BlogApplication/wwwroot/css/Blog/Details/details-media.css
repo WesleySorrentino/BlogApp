@@ -1,0 +1,23 @@
+@media only screen and (device-width: 430px) {
+	#social-links {
+		text-align: left;
+		margin: 0;
+		padding: 1rem 10rem;
+	}
+}
+
+@media only screen and (device-width: 411px) {
+	#social-links {
+		text-align: left;
+		margin: 0;
+		padding: 1rem 9rem;
+	}
+}
+
+@media only screen and (device-width: 375px) {
+	#social-links {
+		text-align: left;
+		margin: 0;
+		padding: 1rem 8rem;
+	}
+}

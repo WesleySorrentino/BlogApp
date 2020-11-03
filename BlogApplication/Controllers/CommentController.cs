@@ -221,7 +221,9 @@ namespace BlogApplication.Controllers
                         db.RemoveComment(id, user);
                         _toastNotification.AddSuccessToastMessage("Successfully deleted comment");
 
-                        return RedirectToAction("Details", "Blog", new { id });
+                        //return RedirectToAction("Details", "Blog", new { comment.Blog_Id});
+                        return RedirectToAction("Details", new RouteValueDictionary(
+                                new { controller = "Blog", action = "Details", Id = item.Blog_Id }));
                     }
                 }
 
