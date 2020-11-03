@@ -18,6 +18,7 @@ namespace BlogApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Contacts contacts = new Contacts();
         private readonly DataAccess db = new DataAccess();
         private readonly ShowContacts showContacts = new ShowContacts();
         private readonly IToastNotification _toastNotification;
@@ -50,13 +51,13 @@ namespace BlogApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Contact([Bind("Name,Email,Message")] Contact contact)
+        public IActionResult Contact([Bind("Name,Subject,Email,Message")] Contact contact)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.AddContactInfoToDb(contact.Name, contact.Email, contact.Message);
+                    db.AddContactInfoToDb(contact.Name, contact.Subject ,contact.Email, contact.Message);
 
                     _toastNotification.AddSuccessToastMessage("Successfully Submitted Form!");
 
@@ -77,6 +78,24 @@ namespace BlogApplication.Controllers
             showContacts.Contacts = db.GetContactInfoToDb();
 
             return View(showContacts);
+        }
+
+        [Authorize(Roles ="Admin")]
+        public IActionResult DeleteContact(int? id)
+        {
+            contacts.Contact = db.GetContactId((int)id);
+
+            return View(contacts.Contact.First());
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpPost]
+        public IActionResult DeleteContact(int id)
+        {
+            db.RemoveContact(id);
+            _toastNotification.AddInfoToastMessage("Removed Contact");
+
+            return RedirectToAction("ShowAllContacts");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

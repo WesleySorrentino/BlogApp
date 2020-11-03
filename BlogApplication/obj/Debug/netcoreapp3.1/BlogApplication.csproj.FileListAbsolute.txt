@@ -435,3 +435,4 @@ C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogAp
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\Manage.cshtml.g.cs
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\DeleteContact.cshtml.g.cs

@@ -260,11 +260,33 @@ namespace DataLibrary
         #endregion
 
         #region ContactDbAccess
-        public IEnumerable<Contact> AddContactInfoToDb(string name, string email, string message)
+        public IEnumerable<Contact> AddContactInfoToDb(string name, string subject,string email, string message)
         {
             using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
 
-            var output = connection.Query<Contact>($"call add_contact_info_to_db('{name}','{email}','{message}')");
+            var output = connection.Query<Contact>($"call add_contact_info_to_db('{name}','{subject}','{email}','{message}')");
+
+            connection.Close();
+
+            return output;
+        }
+
+        public IEnumerable<Contact> GetContactId(int id)
+        {
+            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
+
+            var output = connection.Query<Contact>($"select * from get_contact_info_by_id({id})");
+
+            connection.Close();
+
+            return output;
+        }
+
+        public IEnumerable<Contact> RemoveContact(int id)
+        {
+            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
+
+            var output = connection.Query<Contact>($"call remove_contact_from_db({id})");
 
             connection.Close();
 
