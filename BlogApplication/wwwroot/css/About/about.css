@@ -12,7 +12,7 @@ img {
 
 .logo {
 	margin: auto;
-	padding: 4rem;
+	padding: 2rem;
 }
 
 h3 {
@@ -21,7 +21,8 @@ h3 {
 
 @media only screen and (device-width: 430px) {
 	.logo {
-		padding: 8.5rem;
+		padding: 2rem;
+		margin: auto;
 	}
 }
 
@@ -33,6 +34,6 @@ h3 {
 
 @media only screen and (device-width: 375px) {
 	.logo {
-		padding: 6rem;
+		padding: 1rem;
 	}
 }
