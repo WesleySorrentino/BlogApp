@@ -430,9 +430,9 @@ C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\bin\Debug\netcoreapp3.1\Micros
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\bin\Debug\netcoreapp3.1\NToastNotify.Views.dll
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\bin\Debug\netcoreapp3.1\NToastNotify.dll
-C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.csproj.CoreCompileInputs.cache
-C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\Manage.cshtml.g.cs
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\ResetPassword.cshtml.g.cs
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\DeleteContact.cshtml.g.cs
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.csproj.CoreCompileInputs.cache
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cache

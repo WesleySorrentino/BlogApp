@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v8GuHbI3GAo9+oi4wZj62ESYV1KyjTsv0f/Ddc9gh8oDyiWM0xRQhRVb+acvpOORFWXNi6eorbKTIrrkYgCbEA==",
+  "dgSpecHash": "/72+ejkRqTEyqUA4uP/vLGJH9vXgR4RJT+voFf7CeP6uvxVdpfH0kMXcnUI1l52PwW0e5BfzCONqDGpxODrhsg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Wesley\\Github\\C#\\BlogApp\\BlogApplication\\BlogApplication.csproj",
   "expectedPackageFiles": [
@@ -82,6 +82,7 @@
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\3.1.4\\microsoft.visualstudio.web.codegeneration.3.1.4.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\3.1.4\\microsoft.visualstudio.web.codegeneration.contracts.3.1.4.nupkg.sha512",
     "C:\\Users\\Wesley\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\3.1.4\\microsoft.visualstudio.web.codegeneration.core.3.1.4.nupkg.sha512",
