@@ -82,7 +82,7 @@ namespace BlogApplication.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            _toastNotification.AddErrorToastMessage("Error Occured: Could not Update Password </br> Please Check current Passwords Match!");
+            _toastNotification.AddErrorToastMessage("Error Occured: Could not Update Password </br> Please Check if Passwords Match!");
 
             return View();
         }
@@ -116,7 +116,7 @@ namespace BlogApplication.Controllers
 
             if (signInResult.Succeeded)
             {
-                _toastNotification.AddSuccessToastMessage($"Successfully Logged in as {user.UserName}", new ToastrOptions
+                _toastNotification.AddSuccessToastMessage($"Welcome back {user.UserName}!", new ToastrOptions
                 { 
                     CloseButton = true
                 });

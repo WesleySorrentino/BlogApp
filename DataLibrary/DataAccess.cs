@@ -11,13 +11,35 @@ namespace DataLibrary
 {
     public class DataAccess
     {
+        private readonly NpgsqlConnection connection = new NpgsqlConnection(HerokuConnection());
+
+        #region HerokoAccess
+        private static string HerokuConnection()
+        {
+            var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+            var databaseUri = new Uri(databaseUrl);
+            var userInfo = databaseUri.UserInfo.Split(':');
+
+            var builder = new NpgsqlConnectionStringBuilder
+            {
+                Host = databaseUri.Host,
+                Port = databaseUri.Port,
+                Username = userInfo[0],
+                Password = userInfo[1],
+                Database = databaseUri.LocalPath.TrimStart('/'),
+                SslMode = SslMode.Require,
+                TrustServerCertificate = true
+            };
+
+            return builder.ToString();
+        }
+        #endregion
+
         #region BlogDbAccess
 
         //Shows All Blog Posts in Database
         public IEnumerable<BlogModel> GetBlogsFromDB()
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<BlogModel>("select * from show_all_blogs() order by id DESC");
 
             connection.Close();
@@ -27,9 +49,7 @@ namespace DataLibrary
 
         //Adds Blog to Database
         public IEnumerable<BlogModel> AddBlogToDb(string title, string content, string author)
-        {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            
+        {                        
             var output = connection.Query<BlogModel>($"call add_blog_to_db('{title}','{content}','{author}','{DateTime.Now}')");
 
             connection.Close();
@@ -40,8 +60,6 @@ namespace DataLibrary
         //Selects a Blog from the database matching a Id
         public IEnumerable<BlogModel> GetBlogIdFromDb(long id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<BlogModel>($"select * from get_blog_by_id({id})");
 
             connection.Close();
@@ -52,8 +70,6 @@ namespace DataLibrary
         //Updates a blog in the database
         public IEnumerable<BlogModel> UpdateBlog(long id, string title, string content, string author)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            
             var output = connection.Query<BlogModel>($"call update_blog({id},'{title}','{content}','{author}');");
 
             connection.Close();
@@ -64,7 +80,6 @@ namespace DataLibrary
         //Removes Blog from Database
         public IEnumerable<BlogModel> RemovePost(long id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
             var output = connection.Query<BlogModel>($"call delete_blog({id})");
 
             connection.Close();
@@ -78,8 +93,6 @@ namespace DataLibrary
         //Adds a comment to the database
         public IEnumerable<CommentModel> AddCommentToDb(long blogId, string userName, string userId, string content)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            
             var output = connection.Query<CommentModel>($"call add_comment_to_db ('{userId}', '{blogId}', '{userName}','{content}','{DateTime.Now}');");
 
             connection.Close();
@@ -90,8 +103,6 @@ namespace DataLibrary
         //Displays all comments from the database belonging to the selected blog
         public IEnumerable<CommentModel> GetComments(long id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<CommentModel>($"select * from get_comments_by_blog_id({id}) order by id");
 
             connection.Close();
@@ -102,8 +113,6 @@ namespace DataLibrary
         //Gets comment from database        
         public IEnumerable<CommentModel> GetCommentIdFromDb(long id, string userId)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<CommentModel>($"select * from get_comment_by_id({id},'{userId}')");
 
             connection.Close();
@@ -114,8 +123,6 @@ namespace DataLibrary
         //Updates comment in database
         public IEnumerable<CommentModel> UpdateComment(long id, string content, string userId)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<CommentModel>($"call update_comment({id},'{content}','{userId}')");
 
             connection.Close();
@@ -126,8 +133,6 @@ namespace DataLibrary
         //Removes comment from database
         public IEnumerable<CommentModel> RemoveComment(long id,string userId)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-          
             var output = connection.Query<CommentModel>($"call delete_comment({id},'{userId}')");
 
             connection.Close();
@@ -138,8 +143,6 @@ namespace DataLibrary
         //Removes all comments belonging to provided blog
         public IEnumerable<CommentModel> RemoveCommentsFromBlog(long id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            //Delete from comment where blog_id = {id}
             var output = connection.Query<CommentModel>($"call delete_all_comments_from_blog({id})");
 
             connection.Close();
@@ -153,8 +156,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoryModel> GetCategoryFromDb(long id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var category = new List<CategoryModel>();
 
             var getCategories = GetCategoryFromDb();
@@ -182,8 +183,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoryModel> GetCategoryFromDb()
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            //SELECT * FROM categories;
             var output = connection.Query<CategoryModel>("select * from get_categories()");
 
             connection.Close();
@@ -193,8 +192,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoriesModel> AddCategoryToBlog(int categoriesId, int blog_id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            
             var output = connection.Query<CategoriesModel>($"call add_category_to_blog({categoriesId},{blog_id})");
 
             connection.Close();
@@ -204,8 +201,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoriesModel> GetCategoriesFromDb()
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<CategoriesModel>("SELECT * FROM get_all_category();");
 
             connection.Close();
@@ -215,8 +210,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoriesModel> GetCategoriesIdFromDb(int id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-            //SELECT * FROM category where id = {id};
             var output = connection.Query<CategoriesModel>($"SELECT * FROM get_category_by_id({id})");
 
             connection.Close();
@@ -226,8 +219,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoriesModel> RemoveCategoryFromBlog(int id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-       
             var output = connection.Query<CategoriesModel>($"call remove_category_from_blog({id})");
 
             connection.Close();
@@ -237,8 +228,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoriesModel> RemoveAllCategoriesFromBlog(int id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<CategoriesModel>($"call remove_all_categories_from_blog({id})");
 
             connection.Close();
@@ -248,8 +237,6 @@ namespace DataLibrary
 
         public IEnumerable<CategoryModel> AddCategoryToDb(string name)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<CategoryModel>($"call add_category_to_db('{name}')");
 
             connection.Close();
@@ -262,8 +249,6 @@ namespace DataLibrary
         #region ContactDbAccess
         public IEnumerable<Contact> AddContactInfoToDb(string name, string subject,string email, string message)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<Contact>($"call add_contact_info_to_db('{name}','{subject}','{email}','{message}')");
 
             connection.Close();
@@ -273,8 +258,6 @@ namespace DataLibrary
 
         public IEnumerable<Contact> GetContactId(int id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<Contact>($"select * from get_contact_info_by_id({id})");
 
             connection.Close();
@@ -284,8 +267,6 @@ namespace DataLibrary
 
         public IEnumerable<Contact> RemoveContact(int id)
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<Contact>($"call remove_contact_from_db({id})");
 
             connection.Close();
@@ -295,8 +276,6 @@ namespace DataLibrary
 
         public IEnumerable<Contact> GetContactInfoToDb()
         {
-            using var connection = new NpgsqlConnection(Environment.GetEnvironmentVariable("CONSTRING"));
-
             var output = connection.Query<Contact>($"select * from get_all_contact_info()");
 
             connection.Close();
