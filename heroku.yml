@@ -3,3 +3,6 @@ build:
       web: Dockerfile
   run:
     web: bundle exec puma -C config/puma.rb
+setup:
+    config:
+        POSTGRES_URL: DATABASE_URL

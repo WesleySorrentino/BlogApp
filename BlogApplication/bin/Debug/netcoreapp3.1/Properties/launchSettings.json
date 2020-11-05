@@ -12,8 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "DATABASE_URL": "postgres://xxapkodvwlmdcr:0aaf1ac0eeae0bc2a71baa7c08af5785357153466e893af252dc005884a06333@ec2-23-23-36-227.compute-1.amazonaws.com:5432/d1fp2i9c7kthce",
         "CONSTRING": "Server=127.0.0.1;Port=5432;Database=BlogApplication;User Id=postgres ;Password=We$leyJame$970717!**;",
+        "ASPNETCORE_DATABASE_URL": "postgres://xxapkodvwlmdcr:0aaf1ac0eeae0bc2a71baa7c08af5785357153466e893af252dc005884a06333@ec2-23-23-36-227.compute-1.amazonaws.com:5432/d1fp2i9c7kthce",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }

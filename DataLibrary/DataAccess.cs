@@ -11,10 +11,10 @@ namespace DataLibrary
 {
     public class DataAccess
     {
-        private readonly NpgsqlConnection connection = new NpgsqlConnection(HerokuConnection());
+        public NpgsqlConnection connection = new NpgsqlConnection(HerokuConnection());
 
         #region HerokoAccess
-        private static string HerokuConnection()
+        public static string HerokuConnection()
         {
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
             var databaseUri = new Uri(databaseUrl);
