@@ -23,7 +23,8 @@
 		<div class="col-md-12">
 			<div class="blogPost">
 				<a asp-action="Details" asp-route-id="@blog.Id"><h1>@blog.Title</h1></a>
-				<p>@blog.Content.Substring(0, blog.Content.Length / 55)....</p>
+				<p>@blog.Content.Substring(0, blog.Content.Length / 50)....</p>
+				<p>Categories:</p>
 				@foreach (var i in Model.Category)
 				{
 					@foreach (var cat in Model.Categories)
@@ -34,7 +35,7 @@
 						}
 					}
 				}
-				<p>@blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
+				<p>Posted: @blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
 				<p>Comments: @db.GetComments(blog.Id).Count()</p>
 
 				@if (User.IsInRole("Admin"))

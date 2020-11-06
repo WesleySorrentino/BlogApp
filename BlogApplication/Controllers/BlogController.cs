@@ -116,7 +116,9 @@ namespace TestingDB.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.UpdateBlog(id, blog.Title, blog.Content, blog.Author);                                      
+                    db.UpdateBlog(id, blog.Title, blog.Content, blog.Author);
+
+                    _toastNotification.AddSuccessToastMessage($"Successfully Updated blog: <br/>{blog.Id}<br/>{blog.Title}");
 
                     return RedirectToAction(nameof(Index));
                 }

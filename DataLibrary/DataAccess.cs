@@ -6,6 +6,7 @@ using Dapper;
 using Npgsql;
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data;
 
 namespace DataLibrary
 {
@@ -49,9 +50,13 @@ namespace DataLibrary
 
         //Adds Blog to Database
         public IEnumerable<BlogModel> AddBlogToDb(string title, string content, string author)
-        {                        
-            var output = connection.Query<BlogModel>($"call add_blog_to_db('{title}','{content}','{author}','{DateTime.Now}')");
+        {
+            //Sanitizes input
+            var t = new { Title = title.Replace("'","''"), DbType.String, ParameterDirection.Input };
+            var c = new { Content = content.Replace("'", "''"), DbType.String, ParameterDirection.Input };
 
+            var output =  connection.Query<BlogModel>($"call add_blog_to_db('{t.Title}','{c.Content}','{author}', '{DateTime.Now}')");
+            
             connection.Close();
 
             return output;
@@ -70,7 +75,11 @@ namespace DataLibrary
         //Updates a blog in the database
         public IEnumerable<BlogModel> UpdateBlog(long id, string title, string content, string author)
         {
-            var output = connection.Query<BlogModel>($"call update_blog({id},'{title}','{content}','{author}');");
+            //Sanitizes input            
+            var t = new { Title = title.Replace("'", "''"), DbType.String, ParameterDirection.Input };
+            var c = new { Content = content.Replace("'", "''"), DbType.String, ParameterDirection.Input };
+
+            var output = connection.Query<BlogModel>($"call update_blog({id},'{t.Title}','{c.Content}','{author}');");
 
             connection.Close();
 
@@ -92,8 +101,11 @@ namespace DataLibrary
 
         //Adds a comment to the database
         public IEnumerable<CommentModel> AddCommentToDb(long blogId, string userName, string userId, string content)
-        {
-            var output = connection.Query<CommentModel>($"call add_comment_to_db ('{userId}', '{blogId}', '{userName}','{content}','{DateTime.Now}');");
+        {            
+            //Sanitizes Comment
+            var c = new { Content = content.Replace("'", "''"), DbType.String, ParameterDirection.Input };
+
+            var output = connection.Query<CommentModel>($"call add_comment_to_db ('{userId}', '{blogId}', '{userName}','{c.Content}','{DateTime.Now}');");
 
             connection.Close();
 
@@ -123,7 +135,10 @@ namespace DataLibrary
         //Updates comment in database
         public IEnumerable<CommentModel> UpdateComment(long id, string content, string userId)
         {
-            var output = connection.Query<CommentModel>($"call update_comment({id},'{content}','{userId}')");
+            //Sanitizes Comment
+            var c = new { Content = content.Replace("'", "''"), DbType.String, ParameterDirection.Input };
+
+            var output = connection.Query<CommentModel>($"call update_comment({id},'{c.Content}','{userId}')");
 
             connection.Close();
 
@@ -249,7 +264,11 @@ namespace DataLibrary
         #region ContactDbAccess
         public IEnumerable<Contact> AddContactInfoToDb(string name, string subject,string email, string message)
         {
-            var output = connection.Query<Contact>($"call add_contact_info_to_db('{name}','{subject}','{email}','{message}')");
+            //Sanitizes Contact
+            var s = new { Subject = subject.Replace("'", "''"), DbType.String, ParameterDirection.Input };
+            var m = new { Message = message.Replace("'", "''"), DbType.String, ParameterDirection.Input };
+
+            var output = connection.Query<Contact>($"call add_contact_info_to_db('{name}','{s.Subject}','{email}','{m.Message}')");
 
             connection.Close();
 
