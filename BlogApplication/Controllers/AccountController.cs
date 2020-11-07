@@ -147,7 +147,7 @@ namespace BlogApplication.Controllers
             //adds to database
             var result = await _userManager.CreateAsync(user, password);
 
-            if (!_appDbContext.Users.Any(u=>u.Email == user.Email))
+            if (_appDbContext.Users.Any(u=>u.Email == user.Email))
             {
                 if (result.Succeeded)
                 {

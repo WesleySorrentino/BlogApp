@@ -39,14 +39,14 @@
 	text-align: center;
 }
 
-.blog-info p {
-	/* text-align: center; */
-}
-
 .blog-comments-title {
 	width: auto;
 	margin: 1rem;
 	font-size: 2rem;
+	text-align: center;
+}
+
+.blog-comments-title p{
 	text-align: center;
 }
 
@@ -60,6 +60,10 @@
 
 .blog-comments-buttons {
 	padding: .2rem;
+}
+
+#blog-comments-p {
+	text-align: center;
 }
 
 #social-links ul {
