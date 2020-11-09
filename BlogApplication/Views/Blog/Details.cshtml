@@ -41,8 +41,8 @@
 
 				@if (User.IsInRole("Admin"))
 				{
-					<a asp-action="Edit" asp-route-id="@blog.Id">Edit Post</a>
-					<a asp-action="Delete" asp-route-id="@blog.Id">Delete Post</a>
+					<a asp-action="Edit" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")">Edit Post</a>
+					<a asp-action="Delete" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")">Delete Post</a>
 				}
 
 				<hr />
@@ -50,7 +50,7 @@
 				<div class="col-lg-12 col-sm-1">
 					<div class="blog-comments-title">
 						<p>Comments:</p>
-						<a asp-controller="Comment" asp-route-id="@blog.Id" asp-action="Create" class="btn btn-sm btn-success">Create a comment</a>
+						<a asp-controller="Comment" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")" asp-action="Create" class="btn btn-sm btn-success">Create a comment</a>
 					</div>
 
 
@@ -68,7 +68,7 @@
 								<div class="blog-comments-buttons">
 									@if (comment.Blog_User_Id == UserManager.GetUserId(User))
 									{
-										<a asp-action="Edit" asp-controller="Comment" asp-route-id="@comment.Id" class="btn btn-info btn-sm">Edit Comment</a> <a asp-action="Delete" asp-controller="Comment" asp-route-id="@comment.Id" class="btn btn-sm btn-danger">Delete Comment</a>
+										<a asp-action="Edit" asp-controller="Comment" asp-route-id="@comment.Id" asp-route-title="@blog.Title.Replace(" ","-")" class="btn btn-info btn-sm">Edit Comment</a> <a asp-action="Delete" asp-controller="Comment" asp-route-id="@comment.Id" asp-route-title="@blog.Title.Replace(" ","-")" class="btn btn-sm btn-danger">Delete Comment</a>
 									}
 								</div>
 							}
@@ -85,7 +85,7 @@
 				<div>
 					@if (User.IsInRole("Admin"))
 					{
-						<a asp-action="Details" asp-controller="Category" asp-route-id="@blog.Id">View Categories to this Post</a>
+						<a asp-action="Details" asp-controller="Category" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")">View Categories to this Post</a>
 						<a asp-action="Create" asp-controller="Categories">Add Categories to blog</a>
 					}
 				</div>

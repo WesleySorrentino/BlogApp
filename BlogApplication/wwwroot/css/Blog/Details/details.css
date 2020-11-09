@@ -9,6 +9,7 @@
 .blog-content {
 	text-align: left;
 	width: 100%;
+	padding: 2rem 0;
 }
 
 .blog-author {
@@ -46,7 +47,7 @@
 	text-align: center;
 }
 
-.blog-comments-title p{
+.blog-comments-title p {
 	text-align: center;
 }
 

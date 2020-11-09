@@ -20,7 +20,7 @@ namespace BlogApplication.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id, string title)
         {
             if (id == null)
             {

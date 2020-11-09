@@ -22,8 +22,12 @@
 		{
 		<div class="col-md-12">
 			<div class="blogPost">
-				<a asp-action="Details" asp-route-id="@blog.Id"><h1>@blog.Title</h1></a>
+				<a asp-action="Details" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")"><h2>@blog.Title</h2></a>
 				<p>@blog.Content.Substring(0, blog.Content.Length / 50)....</p>
+				<div class="blogPost-info">
+					<p>Posted: @blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
+					<p>Comments: @db.GetComments(blog.Id).Count()</p>
+				</div>
 				<p>Categories:</p>
 				@foreach (var i in Model.Category)
 				{
@@ -35,13 +39,11 @@
 						}
 					}
 				}
-				<p>Posted: @blog.Post_Date.Date.Month/@blog.Post_Date.Day/@blog.Post_Date.Year</p>
-				<p>Comments: @db.GetComments(blog.Id).Count()</p>
 
 				@if (User.IsInRole("Admin"))
 				{
-					<a asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-success blog-button">Edit Post</a>
-					<a asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger blog-button">Delete Post</a>
+					<a asp-action="Edit" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")" class="btn btn-success blog-button">Edit Post</a>
+					<a asp-action="Delete" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")" class="btn btn-danger blog-button">Delete Post</a>
 				}
 			</div>
 		</div>

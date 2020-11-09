@@ -4,6 +4,11 @@
 	padding: 1rem;
 }
 
+.blogPost-info {
+	float: right;
+	text-align: right;
+}
+
 .blog-button {
 	border-radius: 10%;
 }

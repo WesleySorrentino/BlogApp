@@ -9,6 +9,7 @@ using DataLibrary;
 using DataLibrary.Models;
 using Microsoft.AspNetCore.Authorization;
 using NToastNotify;
+using System.Web;
 
 namespace TestingDB.Controllers
 {
@@ -41,7 +42,7 @@ namespace TestingDB.Controllers
             if (id == null)
             {
                 return NotFound();
-            }           
+            }            
 
             blogModel.Blog = db.GetBlogIdFromDb((long)id);
             blogModel.Category = db.GetCategoryFromDb((long)id);
@@ -50,7 +51,7 @@ namespace TestingDB.Controllers
             if (blogModel == null)
             {
                 return NotFound();
-            }
+            }                       
 
             return View(blogModel);
         }
