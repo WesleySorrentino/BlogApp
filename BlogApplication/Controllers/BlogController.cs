@@ -13,6 +13,7 @@ using System.Web;
 
 namespace TestingDB.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
         readonly DataAccess db = new DataAccess();
@@ -24,9 +25,9 @@ namespace TestingDB.Controllers
             _toastNotification = toastNotification;
         }
 
-
         // GET: BlogController
         //Shows all blogs
+        [AllowAnonymous]
         public ActionResult Index()
         {                         
             blogModel.Blog = db.GetBlogsFromDB();
@@ -36,35 +37,38 @@ namespace TestingDB.Controllers
             return View(blogModel);
         }
 
+        [AllowAnonymous]
         // GET: BlogController/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id, string title)        
         {
-            if (id == null)
+            if (id == null && title == null)
             {
-                return NotFound();
-            }            
+                _toastNotification.AddErrorToastMessage("Id and Title can't be null! Please try again.");
+
+                return RedirectToAction("Index");
+            }
 
             blogModel.Blog = db.GetBlogIdFromDb((long)id);
             blogModel.Category = db.GetCategoryFromDb((long)id);
             blogModel.Comments = db.GetComments((long)id);
 
-            if (blogModel == null)
+            if (blogModel == null || blogModel.Blog.Count() == 0)
             {
-                return NotFound();
-            }                       
+                _toastNotification.AddErrorToastMessage($"Could not find the desired blog post with:<br/>Id of {id} and title of {title}.");
+
+                return RedirectToAction("Index");
+            }
 
             return View(blogModel);
         }
 
         // GET: BlogController/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: BlogController/Create
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind("Title,Content,Author")] BlogModel blog)
@@ -89,7 +93,6 @@ namespace TestingDB.Controllers
         }
 
         // GET: BlogController/Edit/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -108,7 +111,6 @@ namespace TestingDB.Controllers
         }
 
         // POST: BlogController/Edit/5
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, [Bind("Id,Title,Content,Author")] BlogModel blog)
@@ -134,7 +136,6 @@ namespace TestingDB.Controllers
         }
 
         // GET: BlogController/Delete/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -154,7 +155,6 @@ namespace TestingDB.Controllers
 
         // POST: BlogController/Delete/5
         //Removes Blog from Database
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
