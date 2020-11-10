@@ -436,3 +436,4 @@ C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.csproj.CoreCompileInputs.cache
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs

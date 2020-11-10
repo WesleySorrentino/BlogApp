@@ -29,6 +29,11 @@ namespace BlogApplication.Controllers
             _appDbContext = appDbContext;
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         [Authorize]
         public async Task<IActionResult> Manage()
         {   
