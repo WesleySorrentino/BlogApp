@@ -437,3 +437,4 @@ C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogAp
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\BlogApplication.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Account\AccessDenied.cshtml.g.cs
 C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\scopedcss\bundle\BlogApplication.styles.css
+C:\Users\Wesley\Github\C#\BlogApp\BlogApplication\obj\Debug\netcoreapp3.1\Razor\Views\Home\Author.cshtml.g.cs

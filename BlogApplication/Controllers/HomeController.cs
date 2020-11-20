@@ -49,6 +49,11 @@ namespace BlogApplication.Controllers
             return View();
         }
 
+        public IActionResult Author()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Contact([Bind("Name,Subject,Email,Message")] Contact contact)

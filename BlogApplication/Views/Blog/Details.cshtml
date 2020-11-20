@@ -16,8 +16,8 @@
 				<div class="row">
 					<div class="blog-author col-sm-2 col-md-3 col-lg-2">
 						<p>Author</p>
-						<img class="author-image" src="~/Assets/Images/titled 02.png" alt="Wesley Sorrentino Profile Pic" />
-						<p class="author-name">@blog.Author</p>
+						<a asp-controller="Home" asp-action="Author"><img class="author-image" src="~/Assets/Images/titled 02.png" alt="Wesley Sorrentino Profile Pic" /></a>						
+						<a asp-controller="Home" asp-action="Author"><p class="author-name">@blog.Author</p></a>
 					</div>
 					<div class="col-sm-12 col-md-3 col-lg-2" id="social-links">
 						<ul>
@@ -59,8 +59,7 @@
 					{
 					<div class="blog-comments col-sm-12 col-xl-12">
 						@foreach (var comment in Model.Comments)
-						{
-							
+						{						
 							if (comment.Blog_Id == blog.Id)
 							{
 								<p><strong>@comment.Name</strong> - @comment.Content | @comment.Post_date.Month/@comment.Post_date.Day/@comment.Post_date.Year</p>
