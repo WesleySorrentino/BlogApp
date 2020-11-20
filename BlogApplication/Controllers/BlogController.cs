@@ -71,13 +71,13 @@ namespace TestingDB.Controllers
         // POST: BlogController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("Title,Content,Author")] BlogModel blog)
+        public ActionResult Create([Bind("Title,Content,Author,ShowPost")] BlogModel blog)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.AddBlogToDb(blog.Title, blog.Content, blog.Author);
+                    db.AddBlogToDb(blog.Title, blog.Content, blog.Author,blog.ShowPost);
 
                     _toastNotification.AddSuccessToastMessage("Created a new Blog");
                 }
@@ -113,13 +113,13 @@ namespace TestingDB.Controllers
         // POST: BlogController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, [Bind("Id,Title,Content,Author")] BlogModel blog)
+        public ActionResult Edit(int id, [Bind("Id,Title,Content,Author,ShowPost")] BlogModel blog)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.UpdateBlog(id, blog.Title, blog.Content, blog.Author);
+                    db.UpdateBlog(id, blog.Title, blog.Content, blog.Author, blog.ShowPost);
 
                     _toastNotification.AddSuccessToastMessage($"Successfully Updated blog: <br/>{blog.Id}<br/>{blog.Title}");
 

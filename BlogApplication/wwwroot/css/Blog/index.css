@@ -11,3 +11,8 @@
 .blog-button {
 	border-radius: 10%;
 }
+
+.status {
+	font-size: 1.5rem;
+	color: gray;
+}

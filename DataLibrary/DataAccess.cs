@@ -49,13 +49,13 @@ namespace DataLibrary
         }
 
         //Adds Blog to Database
-        public IEnumerable<BlogModel> AddBlogToDb(string title, string content, string author)
+        public IEnumerable<BlogModel> AddBlogToDb(string title, string content, string author, bool showPost)
         {
             //Sanitizes input
             var t = new { Title = title.Replace("'","''"), DbType.String, ParameterDirection.Input };
             var c = new { Content = content.Replace("'", "''"), DbType.String, ParameterDirection.Input };
 
-            var output =  connection.Query<BlogModel>($"call add_blog_to_db('{t.Title}','{c.Content}','{author}', '{DateTime.Now}')");
+            var output =  connection.Query<BlogModel>($"call add_blog('{t.Title}','{c.Content}','{author}', {showPost},'{DateTime.Now}')");
             
             connection.Close();
 
@@ -73,13 +73,13 @@ namespace DataLibrary
         }
 
         //Updates a blog in the database
-        public IEnumerable<BlogModel> UpdateBlog(long id, string title, string content, string author)
+        public IEnumerable<BlogModel> UpdateBlog(long id, string title, string content, string author, bool showPost)
         {
             //Sanitizes input            
             var t = new { Title = title.Replace("'", "''"), DbType.String, ParameterDirection.Input };
             var c = new { Content = content.Replace("'", "''"), DbType.String, ParameterDirection.Input };
 
-            var output = connection.Query<BlogModel>($"call update_blog({id},'{t.Title}','{c.Content}','{author}');");
+            var output = connection.Query<BlogModel>($"call update_blog_post({id},{showPost},'{t.Title}','{c.Content}','{author}');");
 
             connection.Close();
 

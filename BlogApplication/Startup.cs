@@ -74,7 +74,7 @@ namespace BlogApplication
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseNToastNotify();
+            app.UseNToastNotify();            
 
             app.UseEndpoints(endpoints =>
             {

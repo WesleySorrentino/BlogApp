@@ -21,7 +21,20 @@
 		@foreach (var blog in Model.Blog)
 		{
 		<div class="col-md-12">
+			@if (blog.ShowPost || User.IsInRole("Admin"))
+			{
 			<div class="blogPost">
+				@if (User.IsInRole("Admin"))
+				{
+					if (blog.ShowPost)
+					{
+						<i class="fas fa-lock-open status"></i>
+					}
+					else
+					{
+						<i class="fas fa-lock status"></i>
+					}
+				}
 				<a asp-action="Details" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")"><h2>@blog.Title</h2></a>
 				<p>@blog.Content.Substring(0, blog.Content.Length / 50)....</p>
 				<div class="blogPost-info">
@@ -46,6 +59,13 @@
 					<a asp-action="Delete" asp-route-id="@blog.Id" asp-route-title="@blog.Title.Replace(" ","-")" class="btn btn-danger blog-button">Delete Post</a>
 				}
 			</div>
+			}
+			else
+			{
+				<p>No Posts Available.</p>
+			}
+
+
 		</div>
 		}
 	</div>
