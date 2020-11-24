@@ -93,22 +93,30 @@ body {
 	width: 20%;
 }
 
-#links {
+#author-links {
 	margin: 1rem;
 	text-align: center;
 }
 
-#social-links {
+#author-social-links {
 	list-style: none;
-	display: inline;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	text-align: center;
 }
 
-#social-links li {
+#author-social-links li {
 	display: inline;
 	padding: 0;
 	margin: .5rem;
+}
+
+#author-social-links i {
+	padding: .2rem 0;
+}
+
+#author-social-links p {
+	padding: 0 .5rem;
+	display: inline;
 }
