@@ -1,4 +1,5 @@
-# Wesley's Blog
+# This Project is no longer being updated due to newer version of a blog being built
+[See here for new repo](https://github.com/WesleySorrentino/TheBlogProject)
 
 This project is built inside of a Docker container. The reason behind this is to be able to push it to heroku, 
 because unfortunately heroku doesn't support IIS Express application as of writing this.
